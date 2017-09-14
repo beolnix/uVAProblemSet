@@ -9,7 +9,7 @@ int main() {
     // char line[1000];
     long cycleLength[10000] = {0};
     long temp[10000] = {0};
-    freopen("/Users/dan.atmakin/dev/contest/practise_01/test.txt", "r", stdin);
+    // freopen("/Users/dan.atmakin/dev/contest/practise_01/test.txt", "r", stdin);
     while(scanf("%d %d", &i, &j) != EOF) {        
 
         long start = i;
