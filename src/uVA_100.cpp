@@ -4,15 +4,23 @@
 #include <math.h>
 #include <limits>
 
-// #define INT_MAX std::numeric_limits<int>::max()
+#define CACHE_MAX 10000
 
-int calculateCycleLength(int &number)
+namespace uVA_100 
+{    
+
+int calculateCycleLength(int &number, long *temp, long *cycleLength)
 {
     long nextNum = number;
     long step = 1;
     long count = 0;
 TEST:
     count = count + 1;
+    temp[step] = nextNum;
+    if (nextNum < CACHE_MAX && cycleLength[nextNum] > 0) {
+        step = step + cycleLength[nextNum] - 1;
+        goto FINISH;
+    }
     if (nextNum == 1)
     {
         goto FINISH;
@@ -31,11 +39,16 @@ TEST:
             goto TEST;
         }
     }
-FINISH:
+FINISH:    
+    for (long i2 = 1; i2 < count; i2++) {
+        if (temp[i2] < 10000){
+            cycleLength[temp[i2]] = step - i2 + 1;
+        }
+    }
     return step;
 }
 
-int calculateMaxCycleLengthForRange(int start, int end)
+int calculateMaxCycleLengthForRange(int start, int end, long *temp, long *cycleLength)
 {    
     int actualStart = start;
     int actualEnd = end;
@@ -48,7 +61,7 @@ int calculateMaxCycleLengthForRange(int start, int end)
     int maxLength = 0;
     for (int number = actualStart; number <= actualEnd; number++)
     {    
-        int currentLength = calculateCycleLength(number);
+        int currentLength = calculateCycleLength(number, temp, cycleLength);
         if (currentLength > maxLength)
         {
             maxLength = currentLength;
@@ -56,13 +69,17 @@ int calculateMaxCycleLengthForRange(int start, int end)
     }
     return maxLength;
 }
+}
+
 
 int main()
 {        
     int i, j;        
+    long cycleLength[CACHE_MAX] = {0};
+    long temp[CACHE_MAX] = {0};
     while (scanf("%d %d", &i, &j) != EOF)
     {        
-        int result = calculateMaxCycleLengthForRange(i, j);
+        int result = uVA_100::calculateMaxCycleLengthForRange(i, j, temp, cycleLength);
         printf("%d %d %d\n", i, j, result);
     }
 
