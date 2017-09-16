@@ -27,7 +27,7 @@ set_target_properties(uVA_100_test PROPERTIES
 
 add_test( NAME uVA_100_test 
           WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build 
-          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_100_test )
+          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_100_test --log_level=message )
 
 
 

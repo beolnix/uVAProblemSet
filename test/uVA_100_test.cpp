@@ -3,6 +3,7 @@
 
 // libs
 #include <boost/test/unit_test.hpp>
+#define BOOST_CHECK_EQUAL_MESSAGE(L, R, M)      { BOOST_TEST_INFO(M); BOOST_CHECK_EQUAL(L, R); }
 
 // classes to cover with tests
 #include "../src/uVA_100/uVA_100.hpp"
@@ -17,11 +18,10 @@ long cacheMax = CACHE_MAX;
 
 void verifyResultForRange(int expectedResult, int i, int j) {
     int actualResult = uVA_100::calculateMaxCycleLengthForRange(&i, &j, cycleLength, temp, &cacheMax);
-    BOOST_CHECK_EQUAL(actualResult, expectedResult);
     
-    char buff[100];
-    snprintf(buff, sizeof(buff), "[SUCCESS] i: %d, j:%d, result:%d", i, j, expectedResult);
-    BOOST_TEST_MESSAGE(buff);
+    char calcDetails[200];
+    snprintf(calcDetails, sizeof(calcDetails), "[CALC DETAILS] i:%d; j:%d; actual result:%d; expected result: %d;", i, j, actualResult, expectedResult);
+    BOOST_CHECK_EQUAL_MESSAGE(actualResult, expectedResult, calcDetails);    
     BOOST_TEST_PASSPOINT();
 }
 
