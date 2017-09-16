@@ -5,7 +5,7 @@
 #include <boost/test/unit_test.hpp>
 
 // classes to cover with tests
-#include "../src/uVA_100.hpp"
+#include "../src/uVA_100/uVA_100.hpp"
 
 #define CACHE_MAX 10000
 
@@ -15,10 +15,13 @@ BOOST_AUTO_TEST_CASE(assignment)
 
     //Use BOOST_CHECK_EQUAL if you want the values to be
     //printed out if they mismatch
-    // long cycleLength[CACHE_MAX] = {0};
-    // long temp[CACHE_MAX] = {0};
-    // int result = uVA_100::calculateMaxCycleLengthForRange(1, 10, temp, cycleLength);
-    // BOOST_CHECK_EQUAL(result, 20);
+    long cycleLength[CACHE_MAX] = {0};
+    long temp[CACHE_MAX] = {0};
+    long cacheMax = CACHE_MAX;
+    int start = 1;
+    int end = 10;
+    int result = uVA_100::calculateMaxCycleLengthForRange(&start, &end, cycleLength, temp, &cacheMax);
+    BOOST_CHECK_EQUAL(result, 20);
 
-    BOOST_CHECK(true);
+    // BOOST_CHECK(true);
 }
