@@ -3,7 +3,7 @@
 
 // libs
 #include <boost/test/unit_test.hpp>
-#define BOOST_CHECK_EQUAL_MESSAGE(L, R, M)      { BOOST_TEST_INFO(M); BOOST_CHECK_EQUAL(L, R); }
+#define BOOST_CHECK_EQUAL_MESSAGE(L, R, M) { BOOST_TEST_INFO(M); BOOST_CHECK_EQUAL(L, R); }
 
 // classes to cover with tests
 #include "../src/uVA_100/uVA_100.hpp"
