@@ -24,10 +24,10 @@ target_link_libraries(uVA_100_test ${Boost_LIBRARIES} uVA_100_lib)
 
 set_target_properties(uVA_100_test PROPERTIES 
             RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}/build)
-add_test(NAME uVA_100_test 
-                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build 
-                 COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_100_test )            
 
+add_test( NAME uVA_100_test 
+          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build 
+          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_100_test )
 
 
 
