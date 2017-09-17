@@ -1,5 +1,5 @@
 # Problem
-uVA 100: The 3n + 1 problem
+uVA 0100: The 3n + 1 problem
 [link to the problem page](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=36)
 
 Problems in Computer Science are often classi ed as belonging to a certain class of problems (e.g., NP, Unsolvable, Recursive). In this problem you will be analyzing a property of an algorithm whose classi cation is not known for all possible inputs.
