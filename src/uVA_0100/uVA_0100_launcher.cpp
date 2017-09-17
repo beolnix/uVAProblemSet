@@ -3,7 +3,7 @@
 #include <string>
 #include <math.h>
 #include <limits>
-#include "uVA_100.hpp"
+#include "uVA_0100.hpp"
 
 #define CACHE_MAX 10000
 
@@ -15,7 +15,7 @@ int main()
     long cacheMax = CACHE_MAX;
     while (scanf("%d %d", &i, &j) != EOF)
     {
-        int result = uVA_100::calculateMaxCycleLengthForRange(&i, &j, temp, cycleLength, &cacheMax);
+        int result = uVA_0100::calculateMaxCycleLengthForRange(&i, &j, temp, cycleLength, &cacheMax);
         printf("%d %d %d\n", i, j, result);
     }
 

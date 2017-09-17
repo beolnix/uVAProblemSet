@@ -4,7 +4,7 @@
 #include <math.h>
 #include <limits>
 
-namespace uVA_100
+namespace uVA_0100
 {
 
 int calculateCycleLength(int *number, long *temp, long *cycleLength, long *cache_max)
