@@ -12,33 +12,27 @@ int calculateCycleLength(int *number, long *temp, long *cycleLength, long *cache
     long nextNum = *number;
     long step = 1;
     long count = 0;
-TEST:
-    count = count + 1;
-    temp[step] = nextNum;
-    if (nextNum < *cache_max && cycleLength[nextNum] > 0)
-    {
-        step = step + cycleLength[nextNum] - 1;
-        goto FINISH;
-    }
-    if (nextNum == 1)
-    {
-        goto FINISH;
-    }
-    else
+    while (nextNum != 1)
     {
         step = step + 1;
+        count = count + 1;
+        temp[step] = nextNum;
+        // fast stop if cycleLength for given number is cached
+        if (nextNum < *cache_max && cycleLength[nextNum] > 0)
+        {
+            step = step + cycleLength[nextNum] - 1;
+            break;
+        }
+
         if (nextNum % 2 == 0)
         {
             nextNum = nextNum / 2;
-            goto TEST;
         }
         else
         {
             nextNum = (3 * nextNum) + 1;
-            goto TEST;
         }
     }
-FINISH:
     for (long i2 = 1; i2 < count; i2++)
     {
         if (temp[i2] < 10000)
