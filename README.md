@@ -1,3 +1,8 @@
+# Pre-requirements
+* c++11 compatible compiler
+* cmake
+* boost (tested with 1.59.0)
+
 # Build project
 ```
 cd build
