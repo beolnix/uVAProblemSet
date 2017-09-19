@@ -62,7 +62,9 @@ set_target_properties(uVA_10550_test PROPERTIES
 add_test( NAME uVA_10550_test 
           WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build 
           COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_10550_test)
-               
+
+# uVA_11172 - main
+add_executable(uVA_11172 src/uVA_11172/uVA_11172_launcher.cpp)
 
 
 
