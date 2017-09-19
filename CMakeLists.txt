@@ -66,5 +66,21 @@ add_test( NAME uVA_10550_test
 # uVA_11172 - main
 add_executable(uVA_11172 src/uVA_11172/uVA_11172_launcher.cpp)
 
+# uVA_11044 - main
+add_executable(uVA_11044 src/uVA_11044/uVA_11044_launcher.cpp)
+add_library (uVA_11044_lib src/uVA_11044/uVA_11044.cpp src/uVA_11044/uVA_11044.hpp)
+target_link_libraries(uVA_11044 uVA_11044_lib)
+
+# uVA_11044 - test
+add_executable(uVA_11044_test test/uVA_11044/uVA_11044_test.cpp)
+target_link_libraries(uVA_11044_test ${Boost_LIBRARIES} uVA_11044_lib)
+
+set_target_properties(uVA_11044_test PROPERTIES 
+            RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}/build)
+
+add_test( NAME uVA_11044_test 
+          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build 
+          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_11044_test)
+
 
 
