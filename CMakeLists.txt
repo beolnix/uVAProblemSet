@@ -42,7 +42,23 @@ set_target_properties(uVA_0272_test PROPERTIES
 
 add_test( NAME uVA_0272_test 
           WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build 
-          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_0272_test)      
+          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_0272_test)    
+
+# uVA_00119 - main
+add_executable(uVA_00119 src/uVA_00119/uVA_00119_launcher.cpp)
+add_library (uVA_00119_lib src/uVA_00119/uVA_00119.cpp src/uVA_00119/uVA_00119.hpp)
+target_link_libraries(uVA_00119 uVA_00119_lib)
+
+# uVA_00119 - test
+add_executable(uVA_00119_test test/uVA_00119/uVA_00119_test.cpp)
+target_link_libraries(uVA_00119_test ${Boost_LIBRARIES} uVA_00119_lib)
+
+set_target_properties(uVA_00119_test PROPERTIES 
+            RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}/build)
+
+add_test( NAME uVA_00119_test 
+          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build 
+          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_00119_test)              
 
 # uVA_1124 - main
 add_executable(uVA_1124 src/uVA_1124/uVA_1124_launcher.cpp)
