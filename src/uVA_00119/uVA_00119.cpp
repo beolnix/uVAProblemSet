@@ -120,6 +120,4 @@ namespace uVA_00119
 
         return result_str;
     }
-
-
 }
