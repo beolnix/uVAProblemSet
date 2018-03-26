@@ -130,5 +130,20 @@ add_test( NAME uVA_00573_test
           WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build 
           COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_00573_test)          
 
+# uVA_00661 - main
+add_executable(uVA_00661 src/uVA_00661/uVA_00661_launcher.cpp)
+add_library (uVA_00661_lib src/uVA_00661/uVA_00661.cpp src/uVA_00661/uVA_00661.hpp)
+target_link_libraries(uVA_00661 uVA_00661_lib)
+
+# uVA_00119 - test
+add_executable(uVA_00661_test test/uVA_00661/uVA_00661_test.cpp)
+target_link_libraries(uVA_00661_test ${Boost_LIBRARIES} uVA_00661_lib)
+
+set_target_properties(uVA_00661_test PROPERTIES 
+            RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}/build)
+
+add_test( NAME uVA_00661_test 
+          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build 
+          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_00661_test)    
 
 
