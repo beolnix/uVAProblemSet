@@ -24,8 +24,8 @@ namespace uVA_00119
     }
 
     Giver::Giver() {
-        this->receivers_amount = -1;
-        this->cache = -1;
+        this->receivers_amount = 0;
+        this->cache = 0;
     }
 
     int Giver::getCache() {
@@ -54,7 +54,7 @@ namespace uVA_00119
 
     Participant::Participant () {
         this->name = "test";
-        this->amount = -1;
+        this->amount = 0;
     }
 
     int Participant::getAmount() {
@@ -87,7 +87,7 @@ namespace uVA_00119
         std::string result_str = "";
         
 
-        for(std::vector<int>::size_type i = 0; i < lines.size(); i++) {
+        for(std::vector<int>::size_type i = 0; i < lines.size() - 1; i++) {
             /* std::cout << someVector[i]; ... */
             std::string line = lines[i];
             int number_of_participants;
@@ -104,14 +104,19 @@ namespace uVA_00119
             for(std::vector<int>::size_type j = 0; j < number_of_participants; j++) {            
                 i += 1;            
                 std::vector<std::string> details = split_string(lines[i], " ");
-                // printf("DEBUG: reading details<<<%s>>>\n", lines[i].c_str());
+                
                 std::string name = details[0];
                 int amount;
                 sscanf(details[1].c_str(), "%d", &amount);
                 int dest_number;
                 sscanf(details[2].c_str(), "%d", &dest_number);                
-
+                
                 giverMap.insert(std::make_pair(name, Giver(dest_number, amount)));
+                // printf("DEBUG: reading details<<<%s>>>\n", lines[i].c_str());
+
+                if (dest_number < 1) {
+                    continue;
+                }
 
                 for (int dest_index = 3; dest_index < dest_number + 3; dest_index++) {
                     std::string dest_name = details[dest_index];
@@ -140,16 +145,24 @@ namespace uVA_00119
                 char buffer[100];
 
                 int received = resultMap[name].getAmount();
-                int left = giverMap[name].getCache() % giverMap[name].getReceiversAmount();
+                int left = 0;
+                if (giverMap[name].getCache() != 0) {
+                    left = giverMap[name].getCache() % giverMap[name].getReceiversAmount();
+                }
                 int result_amount = received - giverMap[name].getCache() + left;
-                
+                // printf("%s\n", result_str.c_str());
                 sprintf(buffer, "%s %d\n", name.c_str(), result_amount);                
                 result_str.append(buffer);
+            }            
+
+            if (i < lines.size() - 2) {
+                result_str.append("\n");
             }
                         
         }
-
+        
         // printf("%s\n", result_str.c_str());
         return result_str;
     }
 }
+
