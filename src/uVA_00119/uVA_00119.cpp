@@ -8,9 +8,37 @@
 
 namespace uVA_00119
 {
+    class Giver {
+        int receivers_amount;
+        int cache;
+        public:
+            Giver(int, int);
+            Giver();
+            int getReceiversAmount();
+            int getCache();
+    };
+
+    Giver::Giver (int receivers_amount, int cache) {
+        this->receivers_amount = receivers_amount;
+        this->cache = cache;        
+    }
+
+    Giver::Giver() {
+        this->receivers_amount = -1;
+        this->cache = -1;
+    }
+
+    int Giver::getCache() {
+        return this->cache;
+    }
+
+    int Giver::getReceiversAmount() {
+        return this->receivers_amount;
+    }
+
     class Participant {
         std::string name;
-        int amount;
+        int amount;        
 
         public:
             Participant(std::string, int);
@@ -56,7 +84,7 @@ namespace uVA_00119
 
     std::string calculate(std::string& str) {
         std::vector<std::string> lines = split_string(str, "\n");
-        std::string result_str;
+        std::string result_str = "";
         
 
         for(std::vector<int>::size_type i = 0; i < lines.size(); i++) {
@@ -70,9 +98,10 @@ namespace uVA_00119
             
             std::vector<Participant> participants;
             std::unordered_map <std::string, Participant> resultMap;
+            std::unordered_map <std::string, Giver> giverMap;
 
             // printf("DEBUG: %d number of participants\n", number_of_participants);
-            for(std::vector<int>::size_type j = 0; j < number_of_participants; j++) {
+            for(std::vector<int>::size_type j = 0; j < number_of_participants; j++) {            
                 i += 1;            
                 std::vector<std::string> details = split_string(lines[i], " ");
                 // printf("DEBUG: reading details<<<%s>>>\n", lines[i].c_str());
@@ -81,6 +110,9 @@ namespace uVA_00119
                 sscanf(details[1].c_str(), "%d", &amount);
                 int dest_number;
                 sscanf(details[2].c_str(), "%d", &dest_number);                
+
+                giverMap.insert(std::make_pair(name, Giver(dest_number, amount)));
+
                 for (int dest_index = 3; dest_index < dest_number + 3; dest_index++) {
                     std::string dest_name = details[dest_index];
                     int result_amount = amount;
@@ -92,7 +124,7 @@ namespace uVA_00119
 
                     std::pair<std::unordered_map<std::string,Participant>::iterator,bool> ret;
                     Participant p (dest_name, result_amount);
-                    ret = resultMap.insert(std::make_pair(dest_name, p)); //doesnt get added
+                    ret = resultMap.insert(std::make_pair(dest_name, p));
                     
                     if (ret.second == false) {
                         int prevAmount = (*ret.first).second.getAmount();
@@ -102,22 +134,22 @@ namespace uVA_00119
                     
                 }
             }
-            //before result is printed calculate the diff right betwenn how much person gave and received.
-            std::string result_str = "";
+            
             for(std::vector<int>::size_type j = 0; j < number_of_participants; j++) {
                 std::string name = participant_names[j];
                 char buffer[100];
+
+                int received = resultMap[name].getAmount();
+                int left = giverMap[name].getCache() % giverMap[name].getReceiversAmount();
+                int result_amount = received - giverMap[name].getCache() + left;
                 
-                sprintf(buffer, "%s %d\n", name.c_str(), resultMap[name].getAmount());
-                // printf("DEBUG RESULT: %s %d\n", name.c_str(), resultMap[name].getAmount());
+                sprintf(buffer, "%s %d\n", name.c_str(), result_amount);                
                 result_str.append(buffer);
             }
-            
-            if (i+1 < lines.size()) {
-                // printf("DEBUG NEXT: next line is<<<%s>>>\n", lines[i+1].c_str());
-            }
+                        
         }
 
+        // printf("%s\n", result_str.c_str());
         return result_str;
     }
 }
