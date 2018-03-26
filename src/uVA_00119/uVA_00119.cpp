@@ -146,10 +146,13 @@ namespace uVA_00119
 
                 int received = resultMap[name].getAmount();
                 int left = 0;
-                if (giverMap[name].getCache() != 0) {
+                if (giverMap[name].getCache() != 0 && giverMap[name].getReceiversAmount() != 0) {
                     left = giverMap[name].getCache() % giverMap[name].getReceiversAmount();
+                } else {
+                    left = giverMap[name].getCache();
                 }
-                int result_amount = received - giverMap[name].getCache() + left;
+                int result_amount = received + left - giverMap[name].getCache();
+                
                 // printf("%s\n", result_str.c_str());
                 sprintf(buffer, "%s %d\n", name.c_str(), result_amount);                
                 result_str.append(buffer);
