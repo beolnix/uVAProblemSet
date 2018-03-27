@@ -27,8 +27,7 @@ namespace uVA_00661
     std::string calculate(std::string input) {
         std::vector<std::string> lines = split_string(input, "\n");
         std::string result = "";
-        int seqNum = 0;
-        std::string join = "";
+        int seqNum = 0;        
 
         for(std::vector<int>::size_type i = 0; i < lines.size() - 1; i++) {            
             seqNum += 1;
@@ -38,9 +37,8 @@ namespace uVA_00661
 
             if (n == 0 && m == 0 && c == 0) {
                 break;
-            }         
-            result.append(join.c_str());
-            result.append(join.c_str());
+            }                     
+            // result.append(join.c_str());
             
             int fuseCorrupted = 0;
             int devicePower[n];      
@@ -83,20 +81,21 @@ namespace uVA_00661
                 char buffer[100];
                 sprintf(buffer, "Sequence %d\n", seqNum);
                 result.append(buffer);
-                result.append("Fuse was blown.");                
+                result.append("Fuse was blown.\n");                
             } else {
                 char buffer[100];
                 sprintf(buffer, "Sequence %d\n", seqNum);
                 result.append(buffer);
                 result.append("Fuse was not blown.\n");  
                 char buffer2[100];
-                sprintf(buffer2, "Maximal power consumption was %d amperes.", maxPowerConsumption);
+                sprintf(buffer2, "Maximal power consumption was %d amperes.\n", maxPowerConsumption);
                 result.append(buffer2);
             }
-            join = "\n";
+
+            result.append("\n");            
         }
 
-        printf("DEBUG RESULT: %s\n", result.c_str());
+        // printf("DEBUG RESULT: %s\n", result.c_str());
         return result;
     }
 }

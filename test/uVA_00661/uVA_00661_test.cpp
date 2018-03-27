@@ -21,9 +21,9 @@ BOOST_AUTO_TEST_SUITE(generic_tests);
 
 BOOST_AUTO_TEST_CASE(given_test_data)
 {
-    verifyResultFor("Sequence 1\nFuse was blown.", "2 2 10\n5\n7\n1\n2\n0 0 0");
-    verifyResultFor("Sequence 1\nFuse was not blown.\nMaximal power consumption was 9 amperes.", "3 6 10\n2\n5\n7\n2\n1\n2\n3\n1\n3\n0 0 0");
-    verifyResultFor("Sequence 1\nFuse was blown.\n\nSequence 2\nFuse was not blown.\nMaximal power consumption was 9 amperes.", "2 2 10\n5\n7\n1\n2\n3 6 10\n2\n5\n7\n2\n1\n2\n3\n1\n3\n0 0 0");
+    verifyResultFor("Sequence 1\nFuse was blown.\n\n", "2 2 10\n5\n7\n1\n2\n0 0 0");
+    verifyResultFor("Sequence 1\nFuse was not blown.\nMaximal power consumption was 9 amperes.\n\n", "3 6 10\n2\n5\n7\n2\n1\n2\n3\n1\n3\n0 0 0");
+    verifyResultFor("Sequence 1\nFuse was blown.\n\nSequence 2\nFuse was not blown.\nMaximal power consumption was 9 amperes.\n\n", "2 2 10\n5\n7\n1\n2\n3 6 10\n2\n5\n7\n2\n1\n2\n3\n1\n3\n0 0 0");
 }
 
 BOOST_AUTO_TEST_SUITE_END();
