@@ -117,8 +117,8 @@ void verifyReplaceForGivenString(std::string& input, std::string& expectedResult
 BOOST_AUTO_TEST_CASE(given_test_data)
 {
     // smoke test
-    std::string input = "test string\ntest string";
-    std::string expected = "test string\ntest string";
+    std::string input = "test string\\ntest string";
+    std::string expected = "test string\\ntest string";
     verifyReplaceForGivenString(input, expected);   // template just returns input string as it is
 }
 '''
