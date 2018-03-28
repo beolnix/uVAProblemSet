@@ -147,3 +147,19 @@ add_test( NAME uVA_00661_test
           COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_00661_test)    
 
 
+
+# uVA_10141 - main
+add_executable(uVA_10141 src/uVA_10141/uVA_10141_launcher.cpp)
+add_library (uVA_10141_lib src/uVA_10141/uVA_10141.cpp src/uVA_10141/uVA_10141.hpp)
+target_link_libraries(uVA_10141 uVA_10141_lib)
+
+# uVA_10141 - test
+add_executable(uVA_10141_test test/uVA_10141/uVA_10141_test.cpp)
+target_link_libraries(uVA_10141_test ${Boost_LIBRARIES} uVA_10141_lib)
+
+set_target_properties(uVA_10141_test PROPERTIES 
+            RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}/build)
+
+add_test( NAME uVA_10141_test 
+          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build 
+          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_10141_test)
