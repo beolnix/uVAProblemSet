@@ -21,16 +21,16 @@ BOOST_AUTO_TEST_CASE(given_test_data)
 {
     // coffee smoke test
     std::string coffeeInput = "1 1\ncoffee\nStarbucks\n1.50 1\ncoffee\n0 0";
-    std::string coffeeExpected = "RFP #2\nStarbucks";
+    std::string coffeeExpected = "RFP #1\nStarbucks\n";
     verifyReplaceForGivenString(coffeeInput, coffeeExpected);
 
     // cars smoke test
     std::string carsInput = "6 4\nengine\nbrakes\ntires\nashtray\nvinyl roof\ntrip computer\nChevrolet\n20000.00 3\nengine\ntires\nbrakes\nCadillac\n70000.00 4\nashtray\nvinyl roof\ntrip computer\nengine\nHyundai\n10000.00 3\nengine\ntires\nashtray\nLada\n6000.00 1\ntires\n0 0";
-    std::string carsExpected = "RFP #1\nCadillac";
+    std::string carsExpected = "RFP #1\nCadillac\n";
     verifyReplaceForGivenString(carsInput, carsExpected);
 
     // complete smoke test
     std::string input = "6 4\nengine\nbrakes\ntires\nashtray\nvinyl roof\ntrip computer\nChevrolet\n20000.00 3\nengine\ntires\nbrakes\nCadillac\n70000.00 4\nashtray\nvinyl roof\ntrip computer\nengine\nHyundai\n10000.00 3\nengine\ntires\nashtray\nLada\n6000.00 1\ntires\n1 1\ncoffee\nStarbucks\n1.50 1\ncoffee\n0 0";
-    std::string expected = "RFP #1\nCadillac\n\nRFP #2\nStarbucks";
+    std::string expected = "RFP #1\nCadillac\n\nRFP #2\nStarbucks\n";
     verifyReplaceForGivenString(input, expected);
 }
