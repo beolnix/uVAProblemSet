@@ -37,35 +37,34 @@ namespace uVA_10141
             int r, p;            
             sscanf(line.c_str(), "%d %d", &r, &p);
             // printf("DEBUG: starting new case with line: %s - req: %d, props: %d\n", line.c_str(), r, p);
-            if (r ==0 && p == 0) {
+            if (r == 0 && p == 0) {
                 break;
             }
             
-
             i += r; //skip requirements        
 
             std::string bestProposalName = "";
-            double bestPrice = -1;
-            int reqs = 0;            
+            double bestPrice = 2000000000;
+            int reqs = -1;            
             for (int pi = 0; pi < p; pi++) {    
                 i += 1;            
                 std::string propName = lines[i];
                 // printf("DEBUG: parsing the proposal: %s\n", propName.c_str());
 
-                double price;
-                int satisfiedReqNumber;
+                double price = 0;
+                int satisfiedReqNumber = 0;
                 i += 1;
 
                 std::vector<std::string> propDetails = split_string(lines[i], " ");
-                sscanf(propDetails[0].c_str(), "%.2f", &price);
+                sscanf(propDetails[0].c_str(), "%lf", &price);
                 sscanf(propDetails[1].c_str(), "%d", &satisfiedReqNumber);
 
-                // printf("DEBUG: parsed line %s - price %.2f req %d\n", lines[i].c_str(), price, satisfiedReqNumber);
+                // printf("DEBUG: parsed line %s - price %.2f req %d\n", lines[i].c_str(), price, satisfiedReqNumber);                
                 if (satisfiedReqNumber > reqs) {
                     bestProposalName = propName;
                     reqs = satisfiedReqNumber;
                     bestPrice = price;
-                } else if ((satisfiedReqNumber == reqs) && ((price < bestPrice) || (bestPrice < 0))) {
+                } else if ((satisfiedReqNumber == reqs) && (price < bestPrice)) {
                     bestProposalName = propName;
                     reqs = satisfiedReqNumber;
                     bestPrice = price;
@@ -74,17 +73,15 @@ namespace uVA_10141
                 i += satisfiedReqNumber;
             }
 
-            
+            if (rfpN > 1) {
+                result_str.append("\n");
+            }
             char buffer[100];
             std::string prefix = "RFP #";
             sprintf(buffer, "%s%d\n", prefix.c_str(), rfpN);
             result_str.append(buffer);
             result_str.append(bestProposalName);
             result_str.append("\n");            
-
-            if (i < lines.size() - 3) {
-                result_str.append("\n");
-            }
         }
 
         // printf("DEBUG: result str: \n%s\n\n", result_str.c_str());
