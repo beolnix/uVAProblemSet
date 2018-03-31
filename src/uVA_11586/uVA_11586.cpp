@@ -42,6 +42,12 @@ namespace uVA_11586
             std::vector<std::string> pieces = split_string(lines[i], " ");
             int m = 0;
             int f = 0;
+
+            if (pieces.size() < 2) {
+                result.append("NO LOOP\n");
+                continue;
+            }
+
             for(std::vector<int>::size_type j = 0; j < pieces.size(); j++) {
                 if (pieces[j] == "MM") {
                     m += 2;

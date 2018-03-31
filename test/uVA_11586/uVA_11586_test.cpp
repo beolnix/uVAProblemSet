@@ -39,4 +39,24 @@ BOOST_AUTO_TEST_CASE(given_test_data)
     std::string input5 = "4\nMF MF\nFM FF MF MM\nMM FF\nMF MF MF MF FF\n";
     std::string expected5 = "LOOP\nLOOP\nLOOP\nNO LOOP\n";
     verifyReplaceForGivenString(input5, expected5);
+
+    std::string input6 = "1\nMF FM\n";
+    std::string expected6 = "LOOP\n";
+    verifyReplaceForGivenString(input6, expected6);
+
+    std::string input7 = "1\nMF MF FF\n";
+    std::string expected7 = "NO LOOP\n";
+    verifyReplaceForGivenString(input7, expected7);
+
+    std::string input8 = "1\nMM\n";
+    std::string expected8 = "NO LOOP\n";
+    verifyReplaceForGivenString(input8, expected8);
+
+    std::string input9 = "1\nFF\n";
+    std::string expected9 = "NO LOOP\n";
+    verifyReplaceForGivenString(input9, expected9);
+
+    std::string input10 = "1\nFM\n";
+    std::string expected10 = "NO LOOP\n";
+    verifyReplaceForGivenString(input10, expected10);
 }
