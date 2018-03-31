@@ -179,3 +179,19 @@ set_target_properties(uVA_11507_test PROPERTIES
 add_test( NAME uVA_11507_test 
           WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build 
           COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_11507_test)
+
+# uVA_11586 - main
+add_executable(uVA_11586 src/uVA_11586/uVA_11586_launcher.cpp)
+add_library (uVA_11586_lib src/uVA_11586/uVA_11586.cpp src/uVA_11586/uVA_11586.hpp)
+target_link_libraries(uVA_11586 uVA_11586_lib)
+
+# uVA_11586 - test
+add_executable(uVA_11586_test test/uVA_11586/uVA_11586_test.cpp)
+target_link_libraries(uVA_11586_test ${Boost_LIBRARIES} uVA_11586_lib)
+
+set_target_properties(uVA_11586_test PROPERTIES 
+            RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}/build)
+
+add_test( NAME uVA_11586_test 
+          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build 
+          COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build/uVA_11586_test)

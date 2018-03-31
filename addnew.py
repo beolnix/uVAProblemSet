@@ -48,7 +48,7 @@ headerTeamplate = '''
 
 namespace !problemName!
 { 
-    std::string calculate(std::string& str);
+    std::string calculate(std::string& input);
 }
 
 '''
@@ -64,8 +64,32 @@ libTemplate = '''
 
 namespace !problemName! 
 {
-    std::string calculate(std::string& str) {
-        return str;
+    std::vector<std::string> split_string(const std::string& str,
+                                      const std::string& delimiter) {
+        std::vector<std::string> strings;
+
+        std::string::size_type pos = 0;
+        std::string::size_type prev = 0;
+        while ((pos = str.find(delimiter, prev)) != std::string::npos)
+        {
+            strings.push_back(str.substr(prev, pos - prev));
+            prev = pos + 1;
+        }
+
+        // To get the last substring (or only, if delimiter is not found)
+        strings.push_back(str.substr(prev));
+        return strings;
+    }
+
+    std::string calculate(std::string& input) {
+        std::vector<std::string> lines = split_string(input, "\n");
+        std::string result = "";
+
+        for(std::vector<int>::size_type i = 0; i < lines.size() - 1; i++) {
+            result.append(lines[i]);
+        }
+
+        return result;
     }
 }
 '''
